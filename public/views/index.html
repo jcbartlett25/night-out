@@ -1,8 +1,99 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!--stylesheets-->
+    <link href="css/main.css" rel="stylesheet">
+    <!--libraries-->
+    <script src="https://unpkg.com/vue"></script>
+
+
 </head>
 <body>
-    <h1>Test App</h1>
+    <div class="header">
+        <h1 id="site-title">Night Out</h1>
+        <ul class="menu">
+            <li><a href="">Explore</a></li>
+            <li><a href="">My Events</a></li>
+            <li><a href="">Settings</a></li>
+        </ul>
+         
+    </div>
+    <div class="content">
+        <button id="button">Create Event</button>
+
+        <div id="event-Modal" class="modal">
+             <div class="modal-content">
+                <span class="close">&times;</span>
+                <h1> Create an Event! </h1>
+                <form>
+                    <div class="form-group row">
+                         <label for="Name">Event Name</label>
+                         <input type="email" class="form-control" id="Name"  placeholder="Migos Concert">         
+                    </div>
+                    <div class="form-group row">
+                         <label for="Date">Date</label>
+                        <input type="date" class="form-control" id="Date" placeholder="September 25th 2015">
+                    </div>
+                    <div class="form-group row">
+                         <label for="Time">Time</label>
+                        <input type="time" class="form-control" id="Time" placeholder="5:00 pm">
+                    </div>
+                    <div class="form-group row">
+                         <label for="Description">Desciption</label>
+                        <input type="description" class="form-control" id="Description" placeholder="This event will be held at central park...">
+                    </div>
+                     <div class="form-group row">
+                         <label for="Logo">Logo</label>
+                        <input type="logo" class="form-control" id="Logo" placeholder="">
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+        <script>
+        // Get the modal
+        var modal = document.getElementById('event-Modal');
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("button");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        </script>
+
+        <div id="event-feed">
+            <div v-for="event in events" class="event-card">
+                <div class= "event-info">
+                <h2>{{event.name}}</h2>
+                <p>{{event.date}}</p>
+                <p>{{event.time}}</p> 
+                </div>
+                <img v-bind:src= 'event.image'>
+           </div>
+    </div>
+    <div class="upcoming-event-banner">
+        upcoming event
+    </div>
+    <!--scripts-->
+    <script src="js/index.js"></script>
 </body>
 </html>
