@@ -32,4 +32,5 @@ function search(where, callback) {
         }
     });
 }
+
 module.exports = Event;

@@ -1,48 +1,15 @@
 <html>
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Night Out</title>
+
     <!--stylesheets-->
     <link href="css/main.css" rel="stylesheet">
+
     <!--libraries-->
-    <script src="https://unpkg.com/vue"></script>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Night Out</title>
-  <script type="text/javascript" src="http://api.eventful.com/js/api"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Montserrat" >
-  <script type="text/javascript">
-
-
-function show_alert()
-
-{
-
-   var oArgs = {
-
-      app_key: "BdCFq6HP79LPJq8B",
-
-      keywords: "books",
-
-      location: $('#where').val(), 
-
-      page_size: 10,
-
-      sort_order: "popularity",
-
-   };
-
-   EVDB.API.call("/events/search", oArgs, function(oData) {
-
-      console.log(oData);
-
-    });
-
-}
-
-</script>
-
+    <script src="https://unpkg.com/vue"></script>   
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
 
@@ -50,15 +17,40 @@ function show_alert()
 
 
 <body>
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '368952293539014',
+          cookie     : true,
+          xfbml      : true,
+          version    : 'v2.10'
+        });
+          
+        FB.AppEvents.logPageView();
+        FB.getLoginStatus(function(response) {
+            console.log(response);
+        }); 
+          
+      };
+
+      (function(d, s, id){
+         var js, fjs = d.getElementsByTagName(s)[0];
+         if (d.getElementById(id)) {return;}
+         js = d.createElement(s); js.id = id;
+         js.src = "https://connect.facebook.net/en_US/sdk.js";
+         fjs.parentNode.insertBefore(js, fjs);
+       }(document, 'script', 'facebook-jssdk'));
+    </script>
+
     <div class="header">
         <h1 id="site-title">Night Out</h1>
         <ul class="menu">
             <li><a href="">Explore</a></li>
             <li><a href="">My Events</a></li>
             <li><a href="">Settings</a></li>
-        </ul>
-         
+        </ul>    
     </div>
+
     <div class="content">
         <button id="button">Create Event</button>
 
@@ -119,7 +111,16 @@ function show_alert()
                 modal.style.display = "none";
             }
         }
+
+        $.ajax({
+            url: '/search',
+            data: {},
+            success: function(response){
+                console.log(response);
+            }
+        });
         </script>
+        <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
 
         <div id="event-feed">
             <div v-for="event in events" class="event-card">
