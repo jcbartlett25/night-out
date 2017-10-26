@@ -48,8 +48,7 @@ app.get('/search', function(req, res){
             var id = current_event.$.id;
             var title = current_event.title;
             var desc = current_event.description;
-            //var img = current_event.thumb.small.url;
-            var img = '';
+            var img = current_event.image.url;
             var date = current_event.start_time;
             var venue = current_event.venue_name;
             var url = current_event.url;

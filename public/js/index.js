@@ -2,11 +2,13 @@ var feed;
 
 function getEvents(){
   var result = [1,2,3];
+  $('#event-feed').hide();
 
   $.ajax({
     url: '/search',
     data: {},
     success: function(response){
+      $('#event-feed').show();
        render(response);
       },
    });
