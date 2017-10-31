@@ -5,10 +5,12 @@
     <title>Night Out</title>
 
     <!--stylesheets-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link href="css/main.css" rel="stylesheet">
 
+
     <!--libraries-->
-    <script src="https://unpkg.com/vue"></script>   
+    <script src="https://unpkg.com/vue"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 
@@ -88,10 +90,26 @@
                 <div class= "event-info">
                     <h2>{{event.title}}</h2>
                     <p>{{event.date}}</p>
-                    <p>{{event.venue}}</p> 
+                    <p>{{event.venue}}</p>
+
+                    <a href="# + event.id" onclick="toggle_visibility('d');">More Information</a>
+                    <div id="d" style="display:none;">{{event.description}}</div>
+
+
+                    <script type="text/javascript">
+                    function toggle_visibility(id) {
+                        var e = document.getElementById(id);
+                        if(e.style.display == 'block')
+                             e.style.display = 'none';
+                        else
+                            e.style.display = 'block';
+                        }
+                    </script>
+
                 </div>
                 <img v-bind:src= 'event.img'>
            </div>
+        </div>
         </div>
     <div class="upcoming-event-banner">
         upcoming event
