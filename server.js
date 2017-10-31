@@ -20,9 +20,14 @@ app.get('/', function(req, res){
 // Basic eventful search, returns 35 future events in new york
 app.get('/search', function(req, res){
 
-    eventful.search('New York', function(events){ 
-        res.send(events);
-    });
+    if (!req.query.where) {
+        res.send('No location provided...');
+    }
+    else{
+        eventful.search(req.query.where, function(events){ 
+            res.send(events);
+        });
+    }   
 });
 
 // Hard coded the port for simplicity at the moment

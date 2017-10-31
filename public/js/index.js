@@ -6,7 +6,9 @@ function getEvents(){
 
   $.ajax({
     url: '/search',
-    data: {},
+    data: {
+      where: 'New York'
+    },
     success: function(response){
       $('#event-feed').show();
        render(response);
