@@ -30,6 +30,10 @@ app.get('/search', function(req, res){
     }   
 });
 
+app.get('/settings', function(req, res) {
+    res.sendFile(__dirname + '/public/views/settings.html');
+});
+
 // Hard coded the port for simplicity at the moment
 http.listen(port, function(){
     console.log('listening on *:'+port);
