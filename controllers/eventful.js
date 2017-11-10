@@ -15,6 +15,7 @@ var Event = function(id, title, desc, img, url, date, venue) {
 }
 
 // Removes the duplicate events from the event list
+// this file was changed and contributed to the demo
 var removeDuplicates = function(events) {
 
     var seen = new Set();
