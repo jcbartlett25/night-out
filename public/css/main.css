@@ -50,6 +50,10 @@ h1{
     font-size: 30px;
     color: black; 
 }
+#serious {
+    font-size: 16px;
+    padding: 14px 40px;
+}
 
 /*header elements*/
 .header{
