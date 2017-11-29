@@ -30,6 +30,23 @@ app.get('/search', function(req, res){
     }   
 });
 
+app.get('/get', function(req, res){
+
+    if (!req.query.id) {
+        res.send('No id provided...');
+    }
+    else{
+        eventful.get(req.query.id, function(details, err){
+            if (err) {
+                res.send('Failed...');
+            }
+            else{
+                res.send(details);
+            }
+        });
+    }
+});
+
 app.get('/settings', function(req, res) {
     res.sendFile(__dirname + '/public/views/settings.html');
 });
