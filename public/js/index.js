@@ -30,7 +30,6 @@ getEvents();
 
 function success() {
     alert('Congrats, you have successfully make an event!')
-
 }
 
 //given an event id, display a popup modal with relevant details
