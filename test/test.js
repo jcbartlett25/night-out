@@ -1,9 +1,8 @@
-gvar assert = require('assert');
+var assert = require('assert');
 var eventful = require('../controllers/eventful');
 
 
 describe('Eventful', function() {
-
   describe('#search()', function(done) {
     it('should return 35 events in the specified location', function() {
       eventful.search('New York', function(events) {
