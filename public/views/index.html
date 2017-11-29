@@ -7,40 +7,19 @@
     <!--stylesheets-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link href="css/main.css" rel="stylesheet">
+    <link href="css/event-popup.css" rel="stylesheet">
 
 
     <!--libraries-->
     <script src="https://unpkg.com/vue"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="js/fb.js"></script>
 </head>
 
 <body>
-    <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          appId      : '368952293539014',
-          cookie     : true,
-          xfbml      : true,
-          version    : 'v2.10'
-        });
-          
-        FB.AppEvents.logPageView();
-        FB.getLoginStatus(function(response) {
-            console.log(response);
-        }); 
-          
-      };
-
-      (function(d, s, id){
-         var js, fjs = d.getElementsByTagName(s)[0];
-         if (d.getElementById(id)) {return;}
-         js = d.createElement(s); js.id = id;
-         js.src = "https://connect.facebook.net/en_US/sdk.js";
-         fjs.parentNode.insertBefore(js, fjs);
-       }(document, 'script', 'facebook-jssdk'));
-    </script>
-
     <div class="header">
+        <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
         <h1 id="site-title">Night Out</h1>
         <ul class="menu">
             <li><a href="/">Explore</a></li>
@@ -50,7 +29,6 @@
     </div>
 
     <div class="content">
-        <button id="button">Create Event</button>
 
         <div id="event-Modal" class="modal">
              <div class="modal-content">
@@ -78,36 +56,36 @@
                         <input type="logo" class="form-control" id="Logo" placeholder="">
                     </div>
 
+                    <button id ="serious" onclick="success()">Submit!</button>
+
                 </form>
             </div>
 
         </div>
 
-        <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
-
+        <div>
+            <button id="button">Create Event</button>
+        </div>
+        
         <div id="event-feed">
+            <div class="event-popup">
+                <div class="popup-content">
+                    <h1 class="popup-title"></h1>
+                    <h2 class="popop-venue"></h2>
+                    <p class="popup-date"></p>
+                    <p class="popup-description"></p>
+                    <button>Going</button>
+                </div>
+            </div>
             <div v-for="event in events" class="event-card">
                 <div class= "event-info">
                     <h2>{{event.title}}</h2>
                     <p>{{event.date}}</p>
                     <p>{{event.venue}}</p>
-
-                    <a href="#" onclick="toggle_visibility('d');">More Information</a>
+                    <a v-bind:id="'open~event~' + event.id" href="#" onclick="showEvent(this.id);">More Information</a>
                     <div id="d" style="display:none;">{{event.description}}</div>
-
-
-                    <script type="text/javascript">
-                    function toggle_visibility(id) {
-                        var e = document.getElementById(id);
-                        if(e.style.display == 'block')
-                             e.style.display = 'none';
-                        else
-                            e.style.display = 'block';
-                        }
-                    </script>
-
                 </div>
-                <img v-bind:src= 'event.img'>
+                <!-- <img v-bind:src='event.img'> -->
            </div>
         </div>
         </div>
@@ -115,7 +93,7 @@
         upcoming event
     </div>
     <!--scripts-->
-    <script src="js/index.js"></script>
+    <script src="js/index.js"></script>s
 
 </body>
 

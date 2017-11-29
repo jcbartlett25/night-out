@@ -12,7 +12,8 @@ describe('Eventful', function() {
       });
     });
     it('should return no events when specified location doesnt exist', function(){
-      eventful.search('issavibe', function(events) {
+
+      eventful.search('IssaVibe', function(events) {
         assert.equal(0, events.length);
         done();
       });
