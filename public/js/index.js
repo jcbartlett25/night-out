@@ -68,3 +68,21 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+
+//FILTER EVENTS UI
+function myFunction() {
+  document.getElementById("dateDropdown").classList.toggle("show");
+}
+window.onclick = function(event) {
+if (!event.target.matches('.dropbtn')) {
+  var dropdowns = document.getElementsByClassName("dropdown-content");
+  var i;
+  for (i = 0; i < dropdowns.length; i++) {
+    var openDropdown = dropdowns[i];
+    console.log(openDropdown==null);
+    if (openDropdown.classList.contains('show')) {
+      openDropdown.classList.remove('show');
+    }
+  }
+}
+}

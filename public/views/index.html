@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
     <link href="css/main.css" rel="stylesheet">
     <link href="css/event-popup.css" rel="stylesheet">
+    <link href="css/filter-dropdown.css" rel="stylesheet">
 
 
     <!--libraries-->
@@ -55,12 +56,28 @@
                          <label for="Logo">Logo</label>
                         <input type="logo" class="form-control" id="Logo" placeholder="">
                     </div>
-
                 </form>
             </div>
 
         </div>
 
+        <div class="dropdown">
+            <button onclick="openDateFilter()" class="dropbtn">Date</button>
+            <div id="dateFilter" class="dropdown-content">
+                <a href="#">Today</a>
+                <a href="#">Tomorrow</a>
+                <a href="#">Later</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button onclick="openTypeFilter()" class="dropbtn">Type</button>
+            <div id="typeFilter" class="dropdown-content">
+                <a href="#">Concert</a>
+                <a href="#">Food</a>
+                <a href="#">Wholeseome</a>
+            </div>
+        </div>
+        
         <div>
             <button id="button">Create Event</button>
         </div>
