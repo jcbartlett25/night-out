@@ -3,7 +3,6 @@ var eventful = require('../controllers/eventful');
 
 
 describe('Eventful', function() {
-
   describe('#search()', function(done) {
     it('should return 35 events in the specified location', function() {
       eventful.search('New York', function(events) {
@@ -12,6 +11,7 @@ describe('Eventful', function() {
       });
     });
     it('should return no events when specified location doesnt exist', function(){
+
       eventful.search('IssaVibe', function(events) {
         assert.equal(0, events.length);
         done();

@@ -1,6 +1,8 @@
 var exports = module.exports = {};
 var eventful = require('eventful-node');
 var client = new eventful.Client('BdCFq6HP79LPJq8B');
+var xml = require('xml2js');
+var request = require('request');
 
 // Event class
 var Event = function(id, title, desc, img, url, date, venue) {
@@ -64,6 +66,32 @@ exports.search = function(where, callback) {
         }
 
         callback(removeDuplicates(events));
+    });
+}
+
+exports.get = function(id, callback) {
+
+    api = 'https://api.eventful.com/rest/events/get?app_key=BdCFq6HP79LPJq8B&id=' + id;
+    request(api, function(error, response, body){
+        xml.parseString(body, function (err, result) {
+            var temp = result;
+            console.log(temp);
+
+            if (temp.event) {
+
+                var title = temp.event.title[0];
+                var desc = temp.event.description[0];
+                var img = temp.event.images.image;
+                var date = temp.event.start_time[0];
+                var venue = temp.event.venue_name[0];
+                var url = temp.event.url[0];
+
+                callback(new Event(id, title, desc, img, url, date, venue));
+            }
+            else {
+                callback(null, true);
+            }
+        });
     });
 }
 
