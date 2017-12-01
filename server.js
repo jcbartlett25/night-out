@@ -1,9 +1,20 @@
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
-var mysql = require('mysql');
 var path = require('path');
 var eventful = require('./controllers/eventful');
+var mysql = require('mysql');
+var db = mysql.createConnection({
+  host     : '',
+  user     : '',
+  password : '',
+  database : 'first-release'
+});
+
+db.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected to database!");
+});
 //var client = new eventful.Client('BdCFq6HP79LPJq8B');
 
 var port = process.env.PORT || 8080;
@@ -41,7 +52,25 @@ app.get('/get', function(req, res){
                 res.send('Failed...');
             }
             else{
+                db.query('INSERT INTO Events(id, title) VALUES ("'+details.id+'")');
                 res.send(details);
+            }
+        });
+    }
+});
+
+app.get('/attendEvent', function(req, res){
+
+    if (!req.query.eventID && !req.query.userID) {
+        res.send('Needs eventID AND userID');
+    }
+    else{
+        db.query('INSERT INTO Attendance(userID, eventID) VALUES ("'+req.query.userID+'", "'+req.query.eventID+'");', function(err, rows, fields){
+            if (err){
+                res.send('Error marking attendance... Try again');
+            }
+            else{
+                res.send('Success');
             }
         });
     }
