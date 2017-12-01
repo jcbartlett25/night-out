@@ -1,9 +1,13 @@
+// contains functions for handling the view/ creation of events on the main page of the app
+
 var feed;
 var body = document.getElementsByTagName("BODY")[0];
+var selectedEvent;
+var dummyEvent = {title: "Test", venue:"Earth", date:"December 1", description:"gonna be fun!"}
+
 
 //get events using Ajax API call to Josh's code
-function getEvents(){
-  var result = [1,2,3];
+function loadEvents(){
   $('#event-feed').hide();
 
   $.ajax({
@@ -17,45 +21,57 @@ function getEvents(){
       },
    });
 }
+function getEventById(id){
+  $.ajax({
+    url: '/get',
+    data: {
+      where: id
+    },
+    success: function(response){
+      selectedEvent = response;
+      },
+   });
+}
+
 //create view object for event feed
 function renderFeed(ev){
-  feed = new Vue({
-    el: '#event-feed',
+  feed_vue = new Vue({
+    el: '#event-feed', 
     data: {
       events: ev
     }
   });
 }
-getEvents();
+
+function renderSelectedEvent(selectedEvent){
+  event_vue = new Vue({
+    el: '#event-popup',
+    data: {
+      e: selectedEvent
+    }
+  });
+}
+
+loadEvents();
 
 function success() {
-    alert('Congrats, you have successfully make an event!')
+    alert('Congrats, you have successfully make an event!');
 }
+
+//Event popup modal
+var popup_modal = document.getElementById("event-popup");
+var close_event = document.getElementById("close-event");
+//close_event.onclick = function(){popup_modal.style.display = "none";}
+close_event.onclick = function(){alert("it worked");}
 
 //given an event id, display a popup modal with relevant details
 function showEvent(eventIdTag) {
-  var popup_modal = document.getElementsByClassName("event-popup")[0];
   popup_modal.style.display = "block";
-  window.onclick = function(event) {
-    if (event.target == popup_modal) {
-        popup_modal.style.display = "none";
-    }
-  }
-
-  id = eventIdTag.split('-')[2];
-  details = getEventDetails(id);
-  alert(eventIdTag);
-  renderEventPage(details);
+  var id = eventIdTag.split('-')[2];
+  getEventById(id);
+  renderSelectedEvent(selectedEvent);
 }
 
-//given an event id, return appropriate details for the event
-function getEventDetails(eventId){
-  //TODO
-}
-
-function renderEventPage(eventDetails){
-  //TODO
-}
 //CREATE-EVENT MODAL
 var modal = document.getElementById('event-Modal');
 var btn = document.getElementById("button");
