@@ -1,0 +1,18 @@
+Jshint On index.js:
+	
+index.js: line 32, col 60, Missing semicolon.
+index.js: line 43, col 4, Missing semicolon.
+index.js: line 65, col 2, Missing semicolon.
+index.js: line 68, col 2, Missing semicolon.
+index.js: line 73, col 2, Missing semicolon.
+
+Jlint on eventful.js
+
+Use double quotes, not single quotes.var eventful = require('eventful-node');2.34Use double quotes, not single quotes.var client = new eventful.Client('BdCFq6HP79LPJq8B');7.4Unexpected 'this'.    this.id = id;8.4Unexpected 'this'.    this.title = title;9.4Unexpected 'this'.    this.description = desc;10.4Unexpected 'this'.    this.img = img;11.4Unexpected 'this'.    this.url = url;12.4Unexpected 'this'.    this.date = date;13.4Unexpected 'this'.    this.venue = venue;14.1Expected ';' and instead saw 'var'.}23.4Unexpected 'for'.    for(var i in events) {23.8Unexpected 'var'.    for(var i in events) {36.41Unexpected trailing space.// Searches eventful for 35 random events 48.21Use double quotes, not single quotes.        console.log('Recieved ' + data.search.total_items + ' events');48.61Use double quotes, not single quotes.        console.log('Recieved ' + data.search.total_items + ' events');49.9Unexpected trailing space.          50.39Unexpected trailing space.        //print the title of each event 62.83Unexpected trailing space.            events.push(new Event(id, title, desc, img, url, date, venue));         
+
+Jlint on index.js
+
+Use double quotes, not single quotes.  $('#event-feed').hide();9.10Use double quotes, not single quotes.    url: '/search',11.14Use double quotes, not single quotes.      where: 'New York'14.9Use double quotes, not single quotes.      $('#event-feed').show();17.3Expected an identifier and instead saw '}'.   });22.9Use double quotes, not single quotes.    el: '#event-feed',31.11Use double quotes, not single quotes.    alert('Congrats, you have successfully make an event!')44.25Use double quotes, not single quotes.  id = eventIdTag.split('-')[2];52.2Unexpected TODO comment.  //TODO56.2Unexpected TODO comment.  //TODO59.37Use double quotes, not single quotes.var modal = document.getElementById('event-Modal');
+
+
+Most of the errors were syntax errors which were were able to fix. However some syntatical errors such as changing single quotes to double quotes, we did not change. 
