@@ -22,15 +22,33 @@ function loadEvents(){
    });
 }
 function getEventById(id){
-  $.ajax({
+  var get_event_promise = $.ajax({
     url: '/get',
     data: {
       where: id
-    },
-    success: function(response){
+    }
+   }).done(
+    function(response){
       selectedEvent = response;
-      },
-   });
+      console.log(response);
+      console.log(selectedEvent);
+      get_event_promise = new Promise(function(resolve, reject) {
+        // do a thing, possibly async, then…
+      
+        if (selectedEvent != undefined) {
+          resolve("Stuff worked!");
+        }
+        else {
+          reject(Error("It broke"));
+        }
+      });
+      }
+   )
+   return get_event_promise;
+}
+
+function getSelectedEvent(){
+  return selectedEvent;
 }
 
 //create view object for event feed
@@ -61,15 +79,23 @@ function success() {
 //Event popup modal
 var popup_modal = document.getElementById("event-popup");
 var close_event = document.getElementById("close-event");
-//close_event.onclick = function(){popup_modal.style.display = "none";}
-close_event.onclick = function(){alert("it worked");}
+close_event.onclick = function(){popup_modal.style.display = "none";}
 
 //given an event id, display a popup modal with relevant details
 function showEvent(eventIdTag) {
   popup_modal.style.display = "block";
-  var id = eventIdTag.split('-')[2];
-  getEventById(id);
-  renderSelectedEvent(selectedEvent);
+  console.log(eventIdTag);
+  var id = eventIdTag.split('~')[2];
+  console.log(id);
+  var event = getEventById(id);
+  event.then(function(result) {
+    thisEvent = getSelectedEvent();
+    console.log("this event: ");
+    console.log(thisEvent);
+    renderSelectedEvent(thisEvent);
+  }, function(err) {
+    console.log(err); // Error: "It broke"
+  });
 }
 
 //CREATE-EVENT MODAL
