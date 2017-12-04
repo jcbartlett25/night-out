@@ -19,6 +19,16 @@
 </head>
 
 <body>
+    <div id="event-popup">
+            <div id="popup-content">
+                <span id="close-event">&times;</span>
+                <h1 class="popup-title">{{e.title}}</h1>
+                <h2 class="popop-venue">{{e.venue}}</h2>
+                <p class="popup-date">{{e.date}}</p>
+                <p class="popup-description">{{e.description}}</p>
+                <button>Going</button>
+            </div>
+    </div>
     <div class="header">
         <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
         <h1 id="site-title">Night Out</h1>
@@ -28,9 +38,7 @@
             <li><a href="/settings">Settings</a></li>
         </ul>    
     </div>
-
     <div class="content">
-
         <div id="event-Modal" class="modal">
              <div class="modal-content">
                 <span class="close">&times;</span>
@@ -56,17 +64,9 @@
                          <label for="Logo">Logo</label>
                         <input type="logo" class="form-control" id="Logo" placeholder="">
                     </div>
-<<<<<<< HEAD
-=======
-
-                    <button id ="serious" onclick="success()">Submit!</button>
-
->>>>>>> 22d2d4be7788336e8c3531cd1e3a0279c0e17916
                 </form>
             </div>
-
         </div>
-
         <div class="dropdown">
             <button onclick="openDateFilter()" class="dropbtn">Date</button>
             <div id="dateFilter" class="dropdown-content">
@@ -83,21 +83,10 @@
                 <a href="#">Wholeseome</a>
             </div>
         </div>
-        
         <div>
             <button id="button">Create Event</button>
         </div>
-        
         <div id="event-feed">
-            <div class="event-popup">
-                <div class="popup-content">
-                    <h1 class="popup-title"></h1>
-                    <h2 class="popop-venue"></h2>
-                    <p class="popup-date"></p>
-                    <p class="popup-description"></p>
-                    <button>Going</button>
-                </div>
-            </div>
             <div v-for="event in events" class="event-card">
                 <div class= "event-info">
                     <h2>{{event.title}}</h2>
@@ -114,7 +103,7 @@
         upcoming event
     </div>
     <!--scripts-->
-    <script src="js/index.js"></script>s
+    <script src="js/index.js"></script>
 
 </body>
 

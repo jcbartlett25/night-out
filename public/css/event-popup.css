@@ -1,4 +1,4 @@
-.event-popup{
+#event-popup{
     width: 100vw;
     height: 100vh;
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
@@ -7,7 +7,7 @@
     z-index: 2000;
     text-align: center;
 }
-.popup-content{
+#popup-content{
     width: 50vw;
     height: 80vh;
     margin: auto 0 0 25vw;
