@@ -22,6 +22,7 @@ function loadEvents(){
    });
 }
 function getEventById(id){
+  //returns a resolved promise once the requested event has been assigned to selectedEvent
   var get_event_promise = $.ajax({
     url: '/get',
     data: {
@@ -48,6 +49,7 @@ function getEventById(id){
 }
 
 function getSelectedEvent(){
+  //gets the currently selected event to display
   return selectedEvent;
 }
 
@@ -61,6 +63,7 @@ function renderFeed(ev){
   });
 }
 
+//create vue object for event modal popup
 function renderSelectedEvent(selectedEvent){
   event_vue = new Vue({
     el: '#event-popup',
@@ -72,15 +75,10 @@ function renderSelectedEvent(selectedEvent){
 
 loadEvents();
 
-function success() {
-    alert('Congrats, you have successfully make an event!');
-}
-
 //Event popup modal
 var popup_modal = document.getElementById("event-popup");
 var close_event = document.getElementById("close-event");
 close_event.onclick = function(){popup_modal.style.display = "none";}
-
 //given an event id, display a popup modal with relevant details
 function showEvent(eventIdTag) {
   popup_modal.style.display = "block";
@@ -112,22 +110,34 @@ window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
+
+    function success() {
+      alert('Congrats, you have successfully make an event!');
+  }  }
+
+
+// EVENT FILTERING
+function openDateFilter(){
+  //TODO
+}
+function openTypeFilter(){
+  //TODO
 }
 
 //FILTER EVENTS UI
-function myFunction() {
-  document.getElementById("dateDropdown").classList.toggle("show");
-}
-window.onclick = function(event) {
-if (!event.target.matches('.dropbtn')) {
-  var dropdowns = document.getElementsByClassName("dropdown-content");
-  var i;
-  for (i = 0; i < dropdowns.length; i++) {
-    var openDropdown = dropdowns[i];
-    console.log(openDropdown==null);
-    if (openDropdown.classList.contains('show')) {
-      openDropdown.classList.remove('show');
-    }
-  }
-}
-}
+// function myFunction() {
+//   document.getElementById("dateDropdown").classList.toggle("show");
+// }
+// window.onclick = function(event) {
+// if (!event.target.matches('.dropbtn')) {
+//   var dropdowns = document.getElementsByClassName("dropdown-content");
+//   var i;
+//   for (i = 0; i < dropdowns.length; i++) {
+//     var openDropdown = dropdowns[i];
+//     console.log(openDropdown==null);
+//     if (openDropdown.classList.contains('show')) {
+//       openDropdown.classList.remove('show');
+//     }
+//   }
+// }
+// }
