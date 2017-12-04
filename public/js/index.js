@@ -25,7 +25,7 @@ function getEventById(id){
   var get_event_promise = $.ajax({
     url: '/get',
     data: {
-      where: id
+      id : id
     }
    }).done(
     function(response){

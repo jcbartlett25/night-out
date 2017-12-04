@@ -11,10 +11,10 @@ var db = mysql.createConnection({
   database : 'first-release'
 });
 
-db.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected to database!");
-});
+// db.connect(function(err) {
+//   if (err) throw err;
+//   console.log("Connected to database!");
+// });
 //var client = new eventful.Client('BdCFq6HP79LPJq8B');
 
 var port = process.env.PORT || 8080;
