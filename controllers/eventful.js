@@ -14,7 +14,7 @@ var Event = function(id, title, desc, img, url, date, venue) {
     this.url = url;
     this.date = date;
     this.venue = venue;
-}
+};
 
 // Removes the duplicate events from the event list
 // this file was changed and contributed to the demo
@@ -34,7 +34,7 @@ var removeDuplicates = function(events) {
     }
 
     return new_events;
-}
+};
 
 // Searches eventful for 35 random events 
 exports.search = function(where, callback) {
@@ -67,7 +67,7 @@ exports.search = function(where, callback) {
 
         callback(removeDuplicates(events));
     });
-}
+};
 
 exports.get = function(id, callback) {
 
@@ -93,7 +93,7 @@ exports.get = function(id, callback) {
             }
         });
     });
-}
+};
 
 exports.Event = Event;
 exports.removeDuplicates = removeDuplicates;
