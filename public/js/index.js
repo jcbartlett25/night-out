@@ -5,7 +5,35 @@ var body = document.getElementsByTagName("BODY")[0];
 var selectedEvent;
 var dummyEvent = {title: "Event", venue:"Earth", date:"December 1", description:"gonna be fun!"}
 var feed_vue;
+var userID;
+
+window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '368952293539014',
+    cookie     : true,
+    xfbml      : true,
+    version    : 'v2.10'
+  });
+    
+  FB.AppEvents.logPageView();
+  FB.getLoginStatus(function(response) {
+      if (response.status == "connected") {
+        userID = response.authResponse.userID;
+        console.log(response);
+      }
+  }); 
+    
+};
+
+(function(d, s, id){
+   var js, fjs = d.getElementsByTagName(s)[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement(s); js.id = id;
+   js.src = "https://connect.facebook.net/en_US/sdk.js";
+   fjs.parentNode.insertBefore(js, fjs);
+ }(document, 'script', 'facebook-jssdk'));
 var event_vue = new Vue({
+
   el: '#event-popup',
   data: {
     e: dummyEvent

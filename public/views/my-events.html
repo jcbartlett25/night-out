@@ -24,10 +24,20 @@
                     <li><a href="/settings">Settings</a></li>
                 </ul>    
             </div>
+            <div id="event-popup">
+                    <div id="popup-content">
+                        <span id="close-event" onclick="closeEvent()">&times;</span>
+                        <a v-bind:href="e.url"><h1 class="popup-title">{{e.title}}</h1></a>
+                        <h2 class="popop-venue">{{e.venue}}</h2>
+                        <p class="popup-date">{{e.date}}</p>
+                        <p class="popup-description">{{e.description}}</p>
+                        <button onclick="goToSelectedEvent()">Going</button>
+                    </div>
+            </div>
             <div class="content">
                 <div id="my-events-list">
-                    <div v-for="for event in events">
-                        <p>{{event.title}}</p>
+                    <div v-for="event in events">
+                        <h2 v-bind:id="'open~event~' + event.id" onclick=showEvent(this.id)>{{event.title}}</h2>
                     </div>
                 </div>
             </div>
