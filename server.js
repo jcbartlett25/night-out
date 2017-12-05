@@ -74,10 +74,9 @@ app.get('/get', function(req, res){
             }
             else{
                 db.query('INSERT INTO Events(id, title) VALUES ("'+details.id+'", "'+details.title+'")', function(err, rows, fields){
-
-                    
-                        res.send(details);
-
+                   
+                    //db.query('SELECT * FROM Attendance WHERE userID = "'+req.query.userID'" AND eventID = "+eventID+"');
+                    res.send(details);
                 });
             }
         });
@@ -86,17 +85,31 @@ app.get('/get', function(req, res){
 
 app.get('/attendEvent', function(req, res){
 
-    if (!req.query.eventID && !req.query.userID) {
-        res.send('Needs eventID AND userID');
+    if (!req.query.eventID && !req.query.userID && !req.query.userID) {
+        res.send('Needs eventID AND userID AND title');
     }
     else{
-        db.query('INSERT INTO Attendance(userID, eventID) VALUES ("'+req.query.userID+'", "'+req.query.eventID+'");', function(err, rows, fields){
+        db.query('INSERT INTO Attendance(userID, eventID, title) VALUES ("'+req.query.userID+'", "'+req.query.eventID+'", "'+req.query.title+'");', function(err, rows, fields){
             if (err){
-                res.send('Error marking attendance... Try again');
+                if (err.errno == 1062)
+                    res.send('You are already attending this event!');
+                else
+                    res.send('Error in marking you for this event, try again...')
             }
             else{
-                res.send('Success');
+                res.send('Congrats! You are now attending this event!');
             }
+        });
+    }
+});
+
+app.get('/myEvents', function(req, res){
+    if (!req.query.id) {
+        res.send('Need a userID...');
+    }
+    else{
+        db.query('SELECT * FROM Attendance WHERE userID = "'+req.query.id+'"', function(err, rows, fields){
+            console.log(rows);
         });
     }
 });
