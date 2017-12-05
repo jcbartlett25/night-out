@@ -4,7 +4,13 @@ var feed;
 var body = document.getElementsByTagName("BODY")[0];
 var selectedEvent;
 var dummyEvent = {title: "Test", venue:"Earth", date:"December 1", description:"gonna be fun!"}
-
+var feed_vue;
+var event_vue = new Vue({
+  el: '#event-popup',
+  data: {
+    e: dummyEvent
+  }
+});
 
 //get events using Ajax API call to Josh's code
 function loadEvents(){
@@ -21,6 +27,7 @@ function loadEvents(){
       },
    });
 }
+
 function getEventById(id){
   //returns a resolved promise once the requested event has been assigned to selectedEvent
   var get_event_promise = $.ajax({
@@ -31,25 +38,21 @@ function getEventById(id){
    }).done(
     function(response){
       selectedEvent = response;
-      console.log(response);
-      console.log(selectedEvent);
+      console.log("selected event", selectedEvent);
       get_event_promise = new Promise(function(resolve, reject) {
-        // do a thing, possibly async, then…
-      
-        if (selectedEvent != undefined) {
-          resolve("Stuff worked!");
-        }
-        else {
-          reject(Error("It broke"));
-        }
+         if (selectedEvent != undefined) {
+           resolve("Stuff worked!");
+         }
+         else {
+           reject(Error("It broke"));
+         }
       });
       }
-   )
+   );
    return get_event_promise;
 }
 
 function getSelectedEvent(){
-  //gets the currently selected event to display
   return selectedEvent;
 }
 
@@ -63,14 +66,14 @@ function renderFeed(ev){
   });
 }
 
+function updateFeed(ev){
+  feed_vue.events = ev;
+}
+
 //create vue object for event modal popup
 function renderSelectedEvent(selectedEvent){
-  event_vue = new Vue({
-    el: '#event-popup',
-    data: {
-      e: selectedEvent
-    }
-  });
+  console.log(event_vue.data);
+  event_vue.e = selectedEvent;
 }
 
 loadEvents();
@@ -78,7 +81,7 @@ loadEvents();
 //Event popup modal
 var popup_modal = document.getElementById("event-popup");
 var close_event = document.getElementById("close-event");
-close_event.onclick = function(){popup_modal.style.display = "none";}
+function closeEvent(){$('#event-popup').toggle()}
 window.onclick = function(event) {
   if (event.target == popup_modal) {
       popup_modal.style.display = "none";
@@ -86,19 +89,33 @@ window.onclick = function(event) {
 } 
 //given an event id, display a popup modal with relevant details
 function showEvent(eventIdTag) {
-  popup_modal.style.display = "block";
-  console.log(eventIdTag);
   var id = eventIdTag.split('~')[2];
-  console.log(id);
-  var event = getEventById(id);
+  console.log("id: ", id);
+  var event = getEventById(id); //get event promise
   event.then(function(result) {
     thisEvent = getSelectedEvent();
     console.log("this event: ");
-    console.log(thisEvent);
+    console.log(thisEvent.id);
     renderSelectedEvent(thisEvent);
   }, function(err) {
     console.log(err); // Error: "It broke"
   });
+  renderSelectedEvent(selectedEvent);
+  $('#event-popup').show();
+
+}
+
+function goToSelectedEvent(){
+  var thisEvent = selectedEvent;
+  $.ajax({
+    url: '/attendEvent',
+    data: {
+      userID: userID,
+      eventID: selectedEvent.id
+    }
+   }).done(function(response){
+     console.log(response);
+   });
 }
 
 //CREATE-EVENT MODAL
@@ -128,7 +145,7 @@ function openTypeFilter(){
   $('#type-filter').toggle();
 }
 function filterByType(filter){
-
+  
 }
 function filterByDate(filter){
   
