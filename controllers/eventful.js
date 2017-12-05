@@ -14,7 +14,7 @@ var Event = function(id, title, desc, img, url, date, venue) {
     this.url = url;
     this.date = date;
     this.venue = venue;
-}
+};
 
 // Removes the duplicate events from the event list
 // this file was changed and contributed to the demo
@@ -34,12 +34,12 @@ var removeDuplicates = function(events) {
     }
 
     return new_events;
-}
+};
 
 // Searches eventful for 35 random events 
 exports.search = function(where, callback) {
 
-    client.searchEvents({page_size: 35, location: where}, function(err, data){
+    client.searchEvents({page_size: 35, location: where, date: 'today'}, function(err, data){
 
         if(err){
             console.log(err);
@@ -67,7 +67,7 @@ exports.search = function(where, callback) {
 
         callback(removeDuplicates(events));
     });
-}
+};
 
 exports.get = function(id, callback) {
 
@@ -75,7 +75,6 @@ exports.get = function(id, callback) {
     request(api, function(error, response, body){
         xml.parseString(body, function (err, result) {
             var temp = result;
-            console.log(temp);
 
             if (temp.event) {
 
@@ -93,7 +92,7 @@ exports.get = function(id, callback) {
             }
         });
     });
-}
+};
 
 exports.Event = Event;
 exports.removeDuplicates = removeDuplicates;
