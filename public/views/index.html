@@ -10,7 +10,6 @@
     <link href="css/event-popup.css" rel="stylesheet">
     <link href="css/filter-dropdown.css" rel="stylesheet">
 
-
     <!--libraries-->
     <script src="https://unpkg.com/vue"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -21,12 +20,12 @@
 <body>
     <div id="event-popup">
             <div id="popup-content">
-                <span id="close-event">&times;</span>
+                <span id="close-event" onclick="closeEvent()">&times;</span>
                 <h1 class="popup-title">{{e.title}}</h1>
                 <h2 class="popop-venue">{{e.venue}}</h2>
                 <p class="popup-date">{{e.date}}</p>
                 <p class="popup-description">{{e.description}}</p>
-                <button>Going</button>
+                <button onclick="goToSelectedEvent()">Going</button>
             </div>
     </div>
     <div class="header">
@@ -69,22 +68,31 @@
         </div>
         <div class="dropdown">
             <button onclick="openDateFilter()" class="dropbtn">Date</button>
-            <div id="dateFilter" class="dropdown-content">
-                <a href="#">Today</a>
-                <a href="#">Tomorrow</a>
-                <a href="#">Later</a>
-            </div>
+            <ul id="date-filter" class="dropdown-content">
+                <li onclick="filterByDate('all')">All</li>
+                <li onclick="filterByDate('today')">Today</li>
+                <li onclick="filterByDate('thisweek')">This Week</li>
+                <li onclick="filterByDate('nextweek')">Next Week</li>
+            </ul>
         </div>
         <div class="dropdown">
             <button onclick="openTypeFilter()" class="dropbtn">Type</button>
-            <div id="typeFilter" class="dropdown-content">
-                <a href="#">Concert</a>
-                <a href="#">Food</a>
-                <a href="#">Wholeseome</a>
-            </div>
+            <ul id="type-filter" class="dropdown-content">
+                <li onclick="filterByType('music')">Music</li>
+                <li onclick="filterByType('comedy')">Comedy</li>
+                <li onclick="filterByType('festivals_parades')">Festivals</li>
+                <li onclick="filterByType('movies_film')">Film</li>
+                <li onclick="filterByType('food')">Food</li>
+                <li onclick="filterByType('art')">Art</li>
+                <li onclick="filterByType('attractions')">Attractions</li>
+                <li onclick="filterByType('community')">Community</li>
+                <li onclick="filterByType('singles_social')">Social</li>
+                <li onclick="filterByType('performing_arts')">Performing Arts</li>
+                <li onclick="filterByType('sports')">Sports</li>
+            </ul>
         </div>
         <div>
-            <button id="button">Create Event</button>
+            <button id="create-button">Create Event</button>
         </div>
         <div id="event-feed">
             <div v-for="event in events" class="event-card">

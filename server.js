@@ -64,10 +64,9 @@ app.get('/get', function(req, res){
             else{
                 db.query('INSERT INTO Events(id, title) VALUES ("'+details.id+'", "'+details.title+'")', function(err, rows, fields){
 
-                    if(err) throw err;
-                    else{
+                    
                         res.send(details);
-                    }
+
                 });
             }
         });
