@@ -145,10 +145,34 @@ function openTypeFilter(){
   $('#type-filter').toggle();
 }
 function filterByType(filter){
-  
+  $('#event-feed').hide();
+
+  $.ajax({
+    url: '/searchByType',
+    data: {
+      where: 'New York',
+      type: filter
+    },
+    success: function(response){
+      $('#event-feed').show();
+       updateFeed(response);
+      },
+  });
 }
 function filterByDate(filter){
-  
+  $('#event-feed').hide();
+
+  $.ajax({
+    url: '/searchByDate',
+    data: {
+      where: 'New York',
+      time: filter
+    },
+    success: function(response){
+      $('#event-feed').show();
+       updateFeed(response);
+      },
+  });
 }
 
 //FILTER EVENTS UI

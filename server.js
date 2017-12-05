@@ -51,6 +51,17 @@ app.get('/searchByType', function(req, res){
     }
 });
 
+app.get('/searchByDate', function(req, res){
+    if (!req.query.where || !req.query.time) {
+        res.send('Check your query...');
+    }
+    else{
+        eventful.searchByDate(req.query.where, req.query.time, function(events){
+            res.send(events);
+        });
+    }
+});
+
 app.get('/get', function(req, res){
 
     if (!req.query.id) {
