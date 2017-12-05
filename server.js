@@ -26,6 +26,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', function(req, res){
     res.sendFile(__dirname + '/public/views/index.html');
 });
+// Homepage
+app.get('/my-events', function(req, res){
+    res.sendFile(__dirname + '/public/views/my-events.html');
+});
 
 // Basic eventful search, returns 35 future events in new york
 app.get('/search', function(req, res){
