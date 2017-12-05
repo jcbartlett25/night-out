@@ -111,10 +111,11 @@ function goToSelectedEvent(){
     url: '/attendEvent',
     data: {
       userID: userID,
-      eventID: selectedEvent.id
+      eventID: selectedEvent.id,
+      title: selectedEvent.title
     }
    }).done(function(response){
-     console.log(response);
+     alert(response);
    });
 }
 
