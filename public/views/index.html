@@ -69,22 +69,20 @@
         </div>
         <div class="dropdown">
             <button onclick="openDateFilter()" class="dropbtn">Date</button>
-            <div id="dateFilter" class="dropdown-content">
-                <a href="#">Today</a>
-                <a href="#">Tomorrow</a>
-                <a href="#">Later</a>
-            </div>
+            <ul id="date-filter" class="dropdown-content">
+                <li onclick="filterByDate('today')">Today</li>
+                <li onclick="filterByDate('tomorrow')">Tomorrow</li>
+                <li onclick="filterByDate('later')">Later</li>
+            </ul>
         </div>
         <div class="dropdown">
             <button onclick="openTypeFilter()" class="dropbtn">Type</button>
-            <div id="typeFilter" class="dropdown-content">
-                <a href="#">Concert</a>
-                <a href="#">Food</a>
-                <a href="#">Wholeseome</a>
-            </div>
+            <ul id="type-filter" class="dropdown-content">
+                <li onclick="filterByType('food')">Food</li>
+            </ul>
         </div>
         <div>
-            <button id="button">Create Event</button>
+            <button id="create-button">Create Event</button>
         </div>
         <div id="event-feed">
             <div v-for="event in events" class="event-card">

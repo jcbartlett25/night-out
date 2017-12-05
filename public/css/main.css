@@ -20,7 +20,7 @@ h1{
     color: white;
 }
 
-.content button {
+#create-button {
         margin: 2rem 0 0 0;
         background-color: white ;
         /*text-align: left; */

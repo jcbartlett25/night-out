@@ -79,6 +79,11 @@ loadEvents();
 var popup_modal = document.getElementById("event-popup");
 var close_event = document.getElementById("close-event");
 close_event.onclick = function(){popup_modal.style.display = "none";}
+window.onclick = function(event) {
+  if (event.target == popup_modal) {
+      popup_modal.style.display = "none";
+  }
+} 
 //given an event id, display a popup modal with relevant details
 function showEvent(eventIdTag) {
   popup_modal.style.display = "block";
@@ -98,7 +103,7 @@ function showEvent(eventIdTag) {
 
 //CREATE-EVENT MODAL
 var modal = document.getElementById('event-Modal');
-var btn = document.getElementById("button");
+var btn = document.getElementById("create-button");
 var span = document.getElementsByClassName("close")[0];
 btn.onclick = function() {
     modal.style.display = "block";
@@ -110,18 +115,23 @@ window.onclick = function(event) {
     if (event.target == modal) {
         modal.style.display = "none";
     }
-
-    function success() {
-      alert('Congrats, you have successfully make an event!');
-  }  }
-
+  } 
+  function success() {
+    alert('Congrats, you have successfully make an event!');
+  }
 
 // EVENT FILTERING
 function openDateFilter(){
-  //TODO
+  $('#date-filter').toggle();
 }
 function openTypeFilter(){
-  //TODO
+  $('#type-filter').toggle();
+}
+function filterByType(filter){
+
+}
+function filterByDate(filter){
+  
 }
 
 //FILTER EVENTS UI
