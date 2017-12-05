@@ -103,13 +103,24 @@ app.get('/attendEvent', function(req, res){
     }
 });
 
-app.get('/myEvents', function(req, res){
+app.get('/eventsAttending', function(req, res){
     if (!req.query.id) {
         res.send('Need a userID...');
     }
     else{
         db.query('SELECT * FROM Attendance WHERE userID = "'+req.query.id+'"', function(err, rows, fields){
-            console.log(rows);
+            res.send(rows);
+        });
+    }
+});
+
+app.get('/myFriends', function(req, res){
+    if (!req.query.id) {
+        res.send('Need a userID...');
+    }
+    else{
+        db.query('SELECT * FROM Friends WHERE userID = "'+req.query.id+'"', function(err, rows, fields){
+            res.send(rows);
         });
     }
 });
