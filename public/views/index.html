@@ -21,7 +21,7 @@
     <div id="event-popup">
             <div id="popup-content">
                 <span id="close-event" onclick="closeEvent()">&times;</span>
-                <a url="{{e.url}}"><h1 class="popup-title">{{e.title}}</h1></a>
+                <a v-bind:href="e.url"><h1 class="popup-title">{{e.title}}</h1></a>
                 <h2 class="popop-venue">{{e.venue}}</h2>
                 <p class="popup-date">{{e.date}}</p>
                 <p class="popup-description">{{e.description}}</p>
@@ -94,7 +94,7 @@
         <div>
             <button id="create-button">Create Event</button>
         </div>
-        <a href="/my-events">My Events</a>
+        <a id="my-events-link" href="/my-events">My Events</a>
         <div id="event-feed">
             <div v-for="event in events" class="event-card">
                 <div class= "event-info">

@@ -3,7 +3,7 @@
 var feed;
 var body = document.getElementsByTagName("BODY")[0];
 var selectedEvent;
-var dummyEvent = {title: "Test", venue:"Earth", date:"December 1", description:"gonna be fun!"}
+var dummyEvent = {title: "Event", venue:"Earth", date:"December 1", description:"gonna be fun!"}
 var feed_vue;
 var event_vue = new Vue({
   el: '#event-popup',

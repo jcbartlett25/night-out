@@ -26,9 +26,10 @@
             </div>
             <div class="content">
                 <div id="my-events-list">
-                    <div v-for="for event in events"></div>
+                    <div v-for="for event in events">
+                        <p>{{event.title}}</p>
+                    </div>
                 </div>
-                
             </div>
             <script src="js/my-events.js"></script>
         </body>

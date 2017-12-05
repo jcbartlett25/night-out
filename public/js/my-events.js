@@ -24,3 +24,4 @@ function renderFeed(ev){
     });
   }
   
+getMyEvents();
