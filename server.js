@@ -40,6 +40,17 @@ app.get('/search', function(req, res){
     }   
 });
 
+app.get('/searchByType', function(req, res){
+    if (!req.query.where || !req.query.type) {
+        res.send('Check your query...');
+    }
+    else{
+        eventful.searchByType(req.query.where, req.query.type, function(events){
+            res.send(events);
+        });
+    }
+});
+
 app.get('/get', function(req, res){
 
     if (!req.query.id) {

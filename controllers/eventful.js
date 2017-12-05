@@ -14,7 +14,40 @@ var Event = function(id, title, desc, img, url, date, venue) {
     this.url = url;
     this.date = date;
     this.venue = venue;
-};
+};  
+
+exports.searchByType = function(where, type, callback) {
+
+    client.searchEvents({page_size: 35, location: where, category: type}, function(err, data){
+
+        if(err){
+            console.log(err);
+            callback(null);
+        }
+
+        events = [];
+
+        console.log('Recieved ' + data.search.total_items + ' events');
+          
+        //print the title of each event 
+        for(var i in data.search.events.event){
+
+            var current_event = data.search.events.event[i];
+            var id = current_event.$.id;
+            var title = current_event.title;
+            var desc = current_event.description;
+            var img = current_event.image.url;
+            var date = current_event.start_time;
+            var venue = current_event.venue_name;
+            var url = current_event.url;
+
+            events.push(new Event(id, title, desc, img, url, date, venue));         
+        }
+
+        callback(removeDuplicates(events));
+
+    });
+}
 
 // Removes the duplicate events from the event list
 // this file was changed and contributed to the demo
