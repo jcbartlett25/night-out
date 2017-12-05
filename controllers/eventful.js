@@ -39,7 +39,7 @@ var removeDuplicates = function(events) {
 // Searches eventful for 35 random events 
 exports.search = function(where, callback) {
 
-    client.searchEvents({page_size: 35, location: where}, function(err, data){
+    client.searchEvents({page_size: 35, location: where, date: 'today'}, function(err, data){
 
         if(err){
             console.log(err);
@@ -75,7 +75,6 @@ exports.get = function(id, callback) {
     request(api, function(error, response, body){
         xml.parseString(body, function (err, result) {
             var temp = result;
-            console.log(temp);
 
             if (temp.event) {
 

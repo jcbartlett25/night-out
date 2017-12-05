@@ -5,17 +5,16 @@ var path = require('path');
 var eventful = require('./controllers/eventful');
 var mysql = require('mysql');
 var db = mysql.createConnection({
-  host     : '',
-  user     : '',
-  password : '',
+  host     : '35.196.187.235',
+  user     : 'root',
+  password : 'night',
   database : 'first-release'
 });
 
-// db.connect(function(err) {
-//   if (err) throw err;
-//   console.log("Connected to database!");
-// });
-//var client = new eventful.Client('BdCFq6HP79LPJq8B');
+db.connect(function(err) {
+  if (err) throw err;
+  console.log("Connected to database!");
+});
 
 var port = process.env.PORT || 8080;
 
@@ -52,8 +51,13 @@ app.get('/get', function(req, res){
                 res.send('Failed...');
             }
             else{
-                db.query('INSERT INTO Events(id, title) VALUES ("'+details.id+'")');
-                res.send(details);
+                db.query('INSERT INTO Events(id, title) VALUES ("'+details.id+'", "'+details.title+'")', function(err, rows, fields){
+
+                    if(err) throw err;
+                    else{
+                        res.send(details);
+                    }
+                });
             }
         });
     }
