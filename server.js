@@ -30,6 +30,9 @@ app.get('/', function(req, res){
 app.get('/my-events', function(req, res){
     res.sendFile(__dirname + '/public/views/my-events.html');
 });
+app.get('/my-friends', function(req, res){
+    res.sendFile(__dirname + '/public/views/my-friends.html');
+});
 
 // Basic eventful search, returns 35 future events in new york
 app.get('/search', function(req, res){

@@ -1,0 +1,72 @@
+var userID;
+
+window.fbAsyncInit = function() {
+  FB.init({
+    appId      : '368952293539014',
+    cookie     : true,
+    xfbml      : true,
+    version    : 'v2.10'
+  });
+    
+  FB.AppEvents.logPageView();
+  FB.getLoginStatus(function(response) {
+      if (response.status == "connected") {
+        userID = response.authResponse.userID;
+        console.log(response);
+        getMyFriends();
+      }
+  }); 
+    
+};
+
+(function(d, s, id){
+   var js, fjs = d.getElementsByTagName(s)[0];
+   if (d.getElementById(id)) {return;}
+   js = d.createElement(s); js.id = id;
+   js.src = "https://connect.facebook.net/en_US/sdk.js";
+   fjs.parentNode.insertBefore(js, fjs);
+ }(document, 'script', 'facebook-jssdk'));
+
+function getMyFriends(){//TODO
+    $.ajax({
+      url: '/myFriends',
+      data: {
+        id: userID
+      },
+      success: function(response){
+         renderMyFriends(response);
+        },
+     });
+  }
+
+function getFriendsEvents(friendID){
+  
+}
+//create view object for event feed
+function renderMyFriends(ev){
+    my_events_vue = new Vue({
+      el: '#my-events-list', 
+      data: {
+        friends: ev
+      },
+      methods: {
+        getFriendsEvents: function(friendID){
+              $.ajax({
+          url: '/eventsAttending',
+          data: {
+            id: friendID
+          },
+          success: function(response){
+            titles = [];
+             for (i in response) {
+              titles.push(response[i].title);
+             }
+             alert(titles);
+            },
+         });
+        }
+      }
+    });
+
+    console.log(ev);
+  }
