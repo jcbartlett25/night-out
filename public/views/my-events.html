@@ -7,6 +7,7 @@
                 <!--stylesheets-->
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
                 <link href="css/main.css" rel="stylesheet">
+                <link href="css/event-popup.css" rel="stylesheet">
             
                 <!--libraries-->
                 <script src="https://unpkg.com/vue"></script>
@@ -17,7 +18,7 @@
             
         <body>
             <div class="header">
-                <h1 id="site-title">Night Out</h1>
+                <a href="/"><h1 id="site-title">Night Out</h1></a>
                 <ul class="menu">
                     <li><a href="/">Explore</a></li>
                     <li><a href="">My Events</a></li>
@@ -31,16 +32,16 @@
                         <h2 class="popop-venue">{{e.venue}}</h2>
                         <p class="popup-date">{{e.date}}</p>
                         <p class="popup-description">{{e.description}}</p>
-                        <button onclick="goToSelectedEvent()">Going</button>
                     </div>
             </div>
             <div class="content">
                 <div id="my-events-list">
                     <div v-for="event in events">
-                        <h2 v-bind:id="'open~event~' + event.id" onclick=showEvent(this.id)>{{event.title}}</h2>
+                        <h2 v-bind:id="'open~event~' + event.eventID" onclick=showEvent(this.id)>{{event.title}}</h2>
                     </div>
                 </div>
             </div>
+            <script src="js/events.js"></script>
             <script src="js/my-events.js"></script>
         </body>
 </html>
