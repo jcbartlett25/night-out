@@ -154,7 +154,7 @@ exports.get = function(id, callback) {
                 callback(new Event(id, title, desc, img, url, date, venue));
             }
             else {
-                callback(null, true);
+                callback(null);
             }
         });
     });

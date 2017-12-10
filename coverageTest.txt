@@ -1,0 +1,32 @@
+dyn-129-236-235-181:night-out jcbart12595$ ./node_modules/nyc/bin/nyc.js ./node_modules/mocha/bin/mocha 
+
+
+  Eventful
+    #search()
+Recieved 2312 events
+      ✓ should return at least 30 events in the specified location (3870ms)
+Recieved 0 events
+      ✓ should return no events when specified location doesnt exist (1729ms)
+    #removeEvents()
+      ✓ should remove all duplicate titles from a list of events
+      ✓ should remove all duplicate titles from an empty list of events
+      ✓ should remove all duplicate titles from a list of 1 event
+    #get()
+      ✓ should get the all of the data for an event with the specified id (1430ms)
+      ✓ should return null on an invalid event id (395ms)
+    #searchByDate()
+Recieved 2312 events
+      ✓ should only return events for tomorrow (1933ms)
+    #searchByType()
+Recieved 21446 events
+      ✓ should only return relevant results about the type (5039ms)
+
+
+  9 passing (14s)
+
+-------------|----------|----------|----------|----------|----------------|
+File         |  % Stmts | % Branch |  % Funcs |  % Lines |Uncovered Lines |
+-------------|----------|----------|----------|----------|----------------|
+All files    |    93.48 |       70 |      100 |    93.48 |                |
+ eventful.js |    93.48 |       70 |      100 |    93.48 |... ,58,111,112 |
+-------------|----------|----------|----------|----------|----------------|
