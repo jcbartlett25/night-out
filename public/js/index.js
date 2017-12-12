@@ -3,9 +3,13 @@
 var feed;
 var body = document.getElementsByTagName("BODY")[0];
 var selectedEvent;
-var dummyEvent = {title: "Event", venue:"Earth", date:"December 1", description:"gonna be fun!"}
+var dummyEvent = {title: "", venue:"", date:"", description:""}
 var feed_vue;
 var userID;
+
+function parse(str){
+  return $.parseHTML(str);
+}
 
 window.fbAsyncInit = function() {
   FB.init({
@@ -149,11 +153,7 @@ function goToSelectedEvent(){
 
 //CREATE-EVENT MODAL
 var modal = document.getElementById('event-Modal');
-var btn = document.getElementById("create-button");
 var span = document.getElementsByClassName("close")[0];
-btn.onclick = function() {
-    modal.style.display = "block";
-}
 span.onclick = function() {
     modal.style.display = "none";
 }
@@ -169,12 +169,16 @@ window.onclick = function(event) {
 // EVENT FILTERING
 function openDateFilter(){
   $('#date-filter').toggle();
+  $('#type-filter').hide();
 }
 function openTypeFilter(){
   $('#type-filter').toggle();
+  $('#date-filter').hide();
 }
 function filterByType(filter){
   $('#event-feed').hide();
+  $('#date-filter').hide();
+  $('#type-filter').hide();
 
   $.ajax({
     url: '/searchByType',

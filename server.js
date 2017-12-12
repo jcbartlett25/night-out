@@ -148,4 +148,4 @@ function createServer(port) {
 }
 
 exports.server = createServer;
-//createServer(port);
+createServer(port);

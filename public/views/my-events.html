@@ -18,11 +18,10 @@
             
         <body>
             <div class="header">
-                <a href="/"><h1 id="site-title">Night Out</h1></a>
+                <h1 id="site-title">Night Out</h1>
                 <ul class="menu">
-                    <li><a href="/">Explore</a></li>
-                    <li><a href="">My Events</a></li>
-                    <li><a href="/settings">Settings</a></li>
+                        <li><a href="/">Explore</a></li>
+                        <li><a href="/my-friends">My Friends</a></li>
                 </ul>    
             </div>
             <div id="event-popup">
@@ -36,7 +35,7 @@
             </div>
             <div class="content">
                 <div id="my-events-list">
-                    <div v-for="event in events">
+                    <div class="my-event-card" v-for="event in events">
                         <h2 v-bind:id="'open~event~' + event.eventID" onclick=showEvent(this.id)>{{event.title}}</h2>
                     </div>
                 </div>

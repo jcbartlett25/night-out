@@ -30,12 +30,11 @@
     </div>
     <div class="header">
         <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
-        <h1 id="site-title">Night Out</h1>
+        <h1 id="site-title">Night Out</h1>  
         <ul class="menu">
-            <li><a href="/">Explore</a></li>
-            <li><a href="">My Events</a></li>
-            <li><a href="/settings">Settings</a></li>
-        </ul>    
+            <li><a href="/my-events">My Events</a></li>
+            <li><a href="/my-friends">My Friends</a></li>
+        </ul>  
     </div>
     <div class="content">
         <div id="event-Modal" class="modal">
@@ -94,8 +93,6 @@
         <div>
             <!-- <button id="create-button">Create Event</button> -->
         </div>
-        <a id="my-events-link" href="/my-events">My Events</a>
-        <a id="my-events-link" href="/my-friends">My Friends</a>
         <div id="event-feed">
             <div v-for="event in events" class="event-card">
                 <div class= "event-info">
@@ -114,7 +111,7 @@
     </div>
     <!--scripts-->
     <script src="js/index.js"></script>
-
+    
 </body>
 
 </html>

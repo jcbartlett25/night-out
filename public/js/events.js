@@ -1,12 +1,13 @@
 var selectedEvent;
 var dummyEvent = {title: "Event", venue:"Earth", date:"December 1", description:"gonna be fun!"}
 var event_vue = new Vue({
-    
-      el: '#event-popup',
-      data: {
-        e: dummyEvent
-      }
-    });
+  
+    el: '#event-popup',
+    data: {
+      e: dummyEvent
+    }
+  });
+
 function getEventById(id){
     //returns a resolved promise once the requested event has been assigned to selectedEvent
     var get_event_promise = $.ajax({
@@ -39,10 +40,8 @@ return selectedEvent;
 var popup_modal = document.getElementById("event-popup");
 var close_event = document.getElementById("close-event");
 function closeEvent(){$('#event-popup').toggle()}
-window.onclick = function(event) {
-  if (event.target == popup_modal) {
+popup_modal.onclick = function() {
       popup_modal.style.display = "none";
-  }
 } 
 
 //given an event id, display a popup modal with relevant details
