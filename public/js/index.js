@@ -153,9 +153,13 @@ function goToSelectedEvent(){
 
 //CREATE-EVENT MODAL
 var modal = document.getElementById('event-Modal');
+var createBtn = document.getElementById('create-button');
 var span = document.getElementsByClassName("close")[0];
 span.onclick = function() {
     modal.style.display = "none";
+}
+createBtn.onclick = function(){
+    modal.style.display = "block";
 }
 window.onclick = function(event) {
     if (event.target == modal) {
@@ -204,6 +208,21 @@ function filterByDate(filter){
     success: function(response){
       $('#event-feed').show();
        updateFeed(response);
+      },
+  });
+}
+function createNewEvent(){
+  console.log('fes');
+  $.ajax({
+    url: '/createEvent',
+    data: {
+      userID: userID,
+      eventTitle: $('#Name').val(),
+      startTime: $('#Date').val() + ' ' + $('#Time').val(),
+      description: $('#Description').val()
+    },
+    success: function(response){
+      alert(response);
       },
   });
 }

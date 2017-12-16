@@ -3,6 +3,7 @@ var eventful = require('eventful-node');
 var client = new eventful.Client('BdCFq6HP79LPJq8B');
 var xml = require('xml2js');
 var request = require('request');
+var $ = require('jquery');
 
 // Event class
 var Event = function(id, title, desc, img, url, date, venue) {
@@ -159,6 +160,17 @@ exports.get = function(id, callback) {
         });
     });
 };
+
+exports.createEvent = function(eventTitle, startTime, description, callback) {
+
+    api = 'https://api.eventful.com/rest/events/new?app_key=BdCFq6HP79LPJq8B&venue_id=V0-001-000989370-3&start_time='+encodeURI(startTime)+'&title='+encodeURI(eventTitle)+'&description='+encodeURI(description);
+    request(api, function(error, response, body){
+        xml.parseString(body, function (err, result) {
+            console.log(result);
+            callback(result.id);
+        });
+    });
+}
 
 exports.Event = Event;
 exports.removeDuplicates = removeDuplicates;

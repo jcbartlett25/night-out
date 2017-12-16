@@ -58,11 +58,8 @@
                          <label for="Description">Desciption</label>
                         <input type="description" class="form-control" id="Description" placeholder="This event will be held at central park...">
                     </div>
-                     <div class="form-group row">
-                         <label for="Logo">Logo</label>
-                        <input type="logo" class="form-control" id="Logo" placeholder="">
-                    </div>
                 </form>
+                <button id="submit-event-btn" onclick="createNewEvent()">Create Event</button>
             </div>
         </div>
         <div class="dropdown">
@@ -91,7 +88,7 @@
             </ul>
         </div>
         <div>
-            <!-- <button id="create-button">Create Event</button> -->
+            <button id="create-button">Create Event</button>
         </div>
         <div id="event-feed">
             <div v-for="event in events" class="event-card">

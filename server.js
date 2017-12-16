@@ -12,17 +12,17 @@ var db = mysql.createConnection({
 });
 var exports = module.exports = {};
 
-db.connect(function(err) {
-  if (err) throw err;
-  console.log("Connected to database!");
-});
+
 
 var port = process.env.PORT || 8080;
 
 function createServer(port) {
 
+    db.connect(function(err) {
+      if (err) throw err;
+      console.log("Connected to database!");
+    });
     
-
     // Creating static path
     var __dirname = path.resolve();
     app.use(express.static(path.join(__dirname, 'public')));
@@ -133,6 +133,27 @@ function createServer(port) {
         else{
             db.query('SELECT * FROM Friends WHERE userID = "'+req.query.id+'"', function(err, rows, fields){
                 res.send(rows);
+            });
+        }
+    });
+
+    app.get('/createEvent', function(req, res){
+        if (!req.query.userID || !req.query.eventTitle || !req.query.startTime || !req.query.description) {
+            res.send('Need all params...');
+        }
+        else{
+            eventful.createEvent(req.query.eventTitle, req.query.startTime, req.query.description, function(id) {
+                db.query('INSERT INTO Attendance(userID, eventID, title) VALUES ("'+req.query.userID+'", "'+id+'", "'+req.query.eventTitle+'");', function(err, rows, fields){
+                    if (err){
+                        if (err.errno == 1062)
+                            res.send('You are already attending this event!');
+                        else
+                            res.send('Error in marking you for this event, try again...')
+                    }
+                    else{
+                        res.send('Congrats! You created this event');
+                    }
+                });
             });
         }
     });
